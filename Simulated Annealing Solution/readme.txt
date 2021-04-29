@@ -1,20 +1,20 @@
-
-#Simulated Annealing
-
+====================
+Simulated Annealing
+====================
 
 
 What is Simulated Annealing
 ===========================
+SA concepts come from the real time cooling process. When the temperature is high Atoms can move freely. When the temperature reduces, atoms move also gets reduced. Likewise in algorithms we first give a chance to go to several solutions without ignoring them . It helps to jump over the local maxima.but we slowly reduce the chance of getting wrong answers and get the value which is more closely to extract a solution.
 
-SA concepts come from the real time cooling process. When the temperature is high Atoms can move freely. When the temperature reduces, atoms move also gets reduced. 
-Likewise in algorithms we first give a chance to go to several solutions without ignoring them . It helps to jump over the local maxima.but we slowly reduce the chance of getting wrong answers and get the value which is more closely to extract a solution.
 
 
 How do we achieve this in Algorithms
 ====================================
-In simulated annealing we keep a temperature variable to simulate this heating process. We initially set it high and then allow it to slowly ‘cool’ as the algorithm runs. 
-While this temperature variable is high the algorithm will be allowed, with more frequency, to accept solutions that are worse than our current solution. This gives the algorithm the ability to jump out of any local optimums it finds itself in early on in execution.
+In simulated annealing we keep a temperature variable to simulate this heating process. We initially set it high and then allow it to slowly ‘cool’ as the algorithm runs. While this temperature variable is high the algorithm will be allowed, with more frequency, to accept solutions that are worse than our current solution. This gives the algorithm the ability to jump out of any local optimums it finds itself in early on in execution.
 As the temperature is reduced so it reduces the chance of accepting worse solutions, therefore allowing the algorithm to gradually focus in on an area of the search space in which hopefully, a close to optimum solution can be found.
+
+
 
 How we select the neighbouring node
 ===================================
@@ -22,8 +22,10 @@ In the algorithm we generate the neighbours of the current node, need to choose 
 We check if the neighbour solution is better than our current solution. If it is, we accept it unconditionally.
 
 A neighbour solution isn’t better. We need to consider a couple of factors.
-how much worse the neighbour solution.
-how high the current ‘temperature’ of our system is.
+ 1. how much worse the neighbour solution.
+ 2. how high the current ‘temperature’ of our system is.
+
+
 
 Maths behind the selecting next node
 ====================================
@@ -40,19 +42,20 @@ Using ΔE we can define the probability value for the next node, which helps to 
 
 Math.exp ( ΔE / T )
 
-
 We needed this function only the case that evl (c) > evl (n), so every time  this function returns a value between 0 and 1.   
 
 If we consider this function it is clear that,
-
 When Temperature high => acceptable probability value High  => more like the Random search.
 When Temperature Low  =>  acceptable probability value less =>  more like the Hill Climbing.
 
 When  ΔE  high => acceptable probability value less.
 When  ΔE  less => acceptable probability value high.
 
+
+
 In the algorithm we compare this acceptable probability value with a random probability value to determine whether it is acceptable or not. Why?
-If the accepted probability is 0.3 for instance, a random number between 0 and 1 will be less than or equal to this value only in 30% of all possible cases. 
+================================================================================================================================================
+If the accepted probability is 0.3 for instance, a random number between 0 and 1 will be less than or equal to this value only in 30% of all psible cases. 
 A new random number needs to be drawn in every iteration of the algorithm, otherwise the following code would be executed either always or never, for a given run of the algorithm.
 
 
@@ -101,7 +104,8 @@ Pseudocode for Simulated Annealing
 21: PRINT bestSolution, bestObjective
 
 
-
+Imimplement S Simulated Annealing _ TSP
+============================================
 So, Now time to implement the part, with the all knowledge grather on the simulated annealing process implement this java code which gives a solution for the classical traveling salesman problem.this solution contains 4 classes.
 
 City
