@@ -1,6 +1,6 @@
-import java.util.*;
+ import java.util.*;
 
-public class SimulatedAnnealing {
+ public class SimulatedAnnealing {
 
     // Calculate the acceptance probability
     public static double acceptanceProbability(int energy, int newEnergy, double temperature) {
