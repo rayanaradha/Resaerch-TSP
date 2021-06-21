@@ -3,7 +3,7 @@
  public class SimulatedAnnealing {
 
     // Calculate the acceptance probability
-    public static double acceptanceProbability(int energy, int newEnergy, double temperature) {
+    public static double acceptanceProbability(double energy, double newEnergy, double temperature) {
         // If the new solution is better, accept it
         if (newEnergy < energy) {
             return 1.0;
@@ -12,35 +12,24 @@
         return Math.exp((energy - newEnergy) / temperature);
     }
 
-    /*
-    public static void line(){
-        System.out.println("------------------------------------------------------");
-    }*/
 
     public static void main(String[] args) {
        
         //getting input data
-         Scanner x = new Scanner(System.in);        
-         int t = x.nextInt();
-         for(int i=0; i<t ;i++){
-             int a = x.nextInt();
-             int b = (int) x.nextDouble();
-             int c = (int) x.nextDouble();
-             String d = Integer.toString(a);
-             City city = new City(d,b,c);
-             TourManager.addCity(city);
-         }
-         x.close();
-         long startTime = System.nanoTime();
-
-         /*System.out.println("Add all city into a tour manager :");
-        System.out.println(TourManager.destinationCities);
-        System.out.println();
-        System.out.println("Number of cities :"+TourManager.numberOfCities());
-        line();*/
-         
-        
-       // Set initial temp
+        Scanner x = new Scanner(System.in);        
+        int t = x.nextInt();
+        for(int i=0; i<t ;i++){
+          int a = x.nextInt();
+          double b =  x.nextDouble();
+          double c =  x.nextDouble();
+          String d = Integer.toString(a);
+          City city = new City(d,b,c);
+          TourManager.addCity(city);
+        }
+        x.close();
+        long startTime = System.nanoTime();
+          
+        // Set initial temp
         double temp = 10000;
 
         // Cooling rate
@@ -48,16 +37,9 @@
 
         // Initialize intial solution
         Tour currentSolution = new Tour();
-        
         currentSolution.generateIndividual();
-       /* System.out.println("Create initial random path :");
-        System.out.println(currentSolution.getTour());
-        System.out.println();  
-        System.out.println("Initial solution distance: " + currentSolution.getDistance());
-        System.out.println("Current temp :" +temp);
-        line();*/
-
-       // Set as current best
+       
+        // Set as current best
         Tour best = new Tour(currentSolution.getTour());
         
         // Loop until system has cooled
@@ -76,26 +58,17 @@
             // Swap them
             newSolution.setCity(tourPos2, citySwap1);
             newSolution.setCity(tourPos1, citySwap2);
-            
-           /* System.out.println("new random path :");
-            System.out.println(newSolution.getTour());
-            System.out.println();
-         
-            System.out.println("solution distance for new random path: " + newSolution.getDistance());*/
-
+                     
             // Get energy of solutions
-            int currentEnergy = currentSolution.getDistance();
-            int neighbourEnergy = newSolution.getDistance();
+            double currentEnergy = currentSolution.getDistance();
+            double neighbourEnergy = newSolution.getDistance();
 
             // Decide if we should accept the neighbour
             if (acceptanceProbability(currentEnergy, neighbourEnergy, temp) > Math.random()) {
-                //System.out.println("Accepct the new solution");
+   
                 currentSolution = new Tour(newSolution.getTour());
             }
-       /*     else{
-                System.out.println("Not accepct the new solution");
-            }*/
-
+ 
             // Keep track of the best solution found
             if (currentSolution.getDistance() < best.getDistance()) {
                 best = new Tour(currentSolution.getTour());
@@ -104,17 +77,7 @@
             // Cool system
             temp *= 1-coolingRate;
 
-          /* System.out.println("current solution :");
-            System.out.println(newSolution.getTour());
-            System.out.println("Current solution distance: " + newSolution.getDistance());
-            System.out.println();
-            System.out.println("best solution so far we got:");
-            System.out.println(best);
-            System.out.println("Best solution distance: " + best.getDistance());
-            
-           
-            System.out.println("Current temp :" +temp);
-            line();*/
+          
         }
        
          System.out.println(best);

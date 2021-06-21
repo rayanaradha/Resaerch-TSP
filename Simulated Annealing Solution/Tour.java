@@ -6,7 +6,7 @@ public class Tour{
     // Holds our tour of cities
     private ArrayList tour = new ArrayList<City>();
     // Cache
-    private int distance = 0;
+    private double distance = 0;
     
     // Constructs a blank tour
     public Tour(){
@@ -48,7 +48,7 @@ public class Tour{
     }
     
     // Gets the total distance of the tour
-    public int getDistance(){
+    public double getDistance(){
         if (distance == 0) {
             int tourDistance = 0;
             // Loop through our tour's cities
